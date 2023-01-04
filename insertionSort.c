@@ -11,8 +11,9 @@ int main()
     int sortedArray[size_array] = {0};
     for(int i=0;i<size_array;i++)
     {
-        int number=scanf("%d", &number);
-        *(sortedArray+i)=number;
+        int num;
+        scanf("%d", &num);
+        *(sortedArray+i) = num;
     }
     insertion_sort(sortedArray,size_array);
 
@@ -32,14 +33,12 @@ void insertion_sort(int* arr , int len){
     for(int i=1; i<len; i++)
     {
         int currVal= *(arr+i);
-        int counter =0;
         int j = i-1;
         while ((currVal < (*(arr+j))) && (j>=0)){
-             counter++;
              j--;
         }
-        shift_element((arr+(i-counter)),counter);
-        *(arr+(i-counter)) = currVal;
+        shift_element((arr+j),i-j);
+        *(arr+j+1) = currVal;
       }
 }
 

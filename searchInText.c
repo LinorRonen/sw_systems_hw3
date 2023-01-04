@@ -36,34 +36,36 @@ int get_line(char s[])
 {
     int i=0;
     char ch;
-    scanf("%c", &ch);
+    int ret;
+    ret = scanf("%c", &ch);
     while((i<LINE)){
-        if (ch == '\n')
+        if (ch == '\n' || ret == EOF)
         {
             *(s+i) = '\0';
             break;
         }
         *(s+i)= ch;
         i++;
-        scanf("%c", &ch);
+        ret = scanf("%c", &ch);
     }
     return i;
 }
 
 int getword(char w[])
 {
-    int i=1;
+    int i=0;
     char ch;
-    scanf("%c", &ch);
+    int ret;
+    ret = scanf("%c", &ch);
     while(i<WORD){
-        if ((ch == '\n') || (ch == '\t') || (ch == ' '))
+        if ((ch == '\n') || (ch == '\t') || (ch == ' ') || ret == EOF)
         {
             *(w+i) = '\0';
             break;
         }
         *(w+i)= ch;
         i++;
-        scanf("%c", &ch);
+        ret = scanf("%c", &ch);
     }
     return i;
 }
@@ -72,12 +74,12 @@ int substring(char * str1,char * str2)
 {
     int str1Len=strlen(str1), str2Len=strlen(str2);
     int count;
-    for(int k1=0; k1<(str1Len-str2Len)+1; k1++)
+    for(int k1=0; k1<=(str1Len-str2Len); k1++)
     {
         count = 0;
-        for(int k2=0; k2<str1Len-str2Len;k2++)
+        for(int k2=0; k2<str2Len;k2++)
         {
-            if(*(str1+k2)==*(str2+k1+k2))
+            if(*(str1+k1+k2)==*(str2+k2))
             {
                 count++;
             }
@@ -132,7 +134,7 @@ void print_similar_words(char * str)
     int sum=getword(theWord);
     while (sum!=0)
     {
-        if(similar(theWord,str,1)==1 || strcmp(theWord,str)==0)
+        if(similar(theWord,str,1)==1 || similar(theWord,str,0)==1)
         {
             printf("%s\n",theWord);
         }
