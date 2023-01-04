@@ -54,7 +54,7 @@ int get_line(char s[])
 int getword(char w[])
 {
     int i=0;
-    char ch;
+    char ch = '\0';
     int ret;
     ret = scanf("%c", &ch);
     while(i<WORD){
