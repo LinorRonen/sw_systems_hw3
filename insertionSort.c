@@ -34,8 +34,8 @@ void insertion_sort(int* arr , int len){
     {
         int currVal= *(arr+i);
         int j = i-1;
-        while ((currVal < (*(arr+j))) && (j>=0)){
-             j--;
+        while ((j>=0) && currVal < *(arr+j)){
+             --j;
         }
         shift_element((arr+j),i-j);
         *(arr+j+1) = currVal;
