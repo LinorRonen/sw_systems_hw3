@@ -19,7 +19,12 @@ int main()
 
     for(int i=0;i<size_array;i++)
     {
-        printf("%d%c",*(sortedArray+i),(i == size_array-1 ? '\n':','));
+        printf("%d",*(sortedArray+i));
+
+        if (i == size_array-1)
+            printf("\n");
+        else
+            printf(",");
     }
 }
 

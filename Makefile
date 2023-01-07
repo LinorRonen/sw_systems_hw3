@@ -1,18 +1,21 @@
 CC = gcc
 CFLAGS = -Wall -g
 
-.PHONY: all clean
+all: insertionSort searchInText
 
-all: isort txtfind
+searchInText: searchInText.o
+	$(CC) $(CFLAGS) -o txtfind searchInText.o
 
-isort: insertionSort.o
-	$(CC) $(CFLAGS) $^ -o $@
+searchInText.o: searchInText.c
+	$(CC) $(CFLAGS) -c searchInText.c
 
-txtfind: searchInText.o
-	$(CC) $(CFLAGS) $^ -o $@
+insertionSort: insertionSort.o
+	$(CC) $(CFLAGS) -o isort insertionSort.o
 
-%.o: %.c
-	$(CC) $(CFLAGS) -c $<
+insertionSort.o: insertionSort.c
+	$(CC) $(CFLAGS) -c insertionSort.c
+
+.PHONY: clean all
 
 clean:
-	rm -f *.o isort txtfind
+	rm txtfind isort *.o
